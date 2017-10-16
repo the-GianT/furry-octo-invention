@@ -6,20 +6,40 @@ struct node {
   struct node *next
 };
 
-void print_list(struct node * n)
+// Precondition: The "next" pointer in the last node of the list must point to null
+void print_list(struct node * front)
 {
   printf("[");
-  while (n->cargo) {
-    printf("%c ", n->cargo);
-    n = n->next;
+  while (*front) {
+    printf("%c ", front->cargo);
+    front = front->next;
   }
-  printf("]\n");
+  printf("]");
 }
 
-struct node * insert_front(struct node * n, char c)
+struct node * insert_front(struct node * front, char c)
 {
-  n = n->next; // shift to the next node's pointer
-  n = (struct node)malloc(sizeof(struct node)); // set that pointer to a new node
-  n->cargo = c;
-  return n; // this is the new front of the list
+  struct node * newNode = (struct node)malloc(sizeof(struct node));
+
+  newNode->cargo = c;
+  newNode->next = front;
+
+  return newNode;
+  
+  /*
+  front = front->next; // shift to the next node pointer
+  front = (struct node)malloc(sizeof(struct node)); // create the new node
+  
+  front->cargo = c;
+  front->next = &0;
+  
+  return front; // this is the new front of the list
+  */
+}
+
+struct node * free_list(struct node * front)
+{
+  while (*front) {
+    
+  }
 }
